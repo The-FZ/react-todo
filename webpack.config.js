@@ -20,8 +20,8 @@ module.exports = {
     filename:'./public/bundle.js'
   },
   resolve:{
+    modules:['node_modules','./app/components'],
     alias:{
-      Main:path.resolve(__dirname,'./app/components/Main.js'),
       applicationStyles:path.resolve(__dirname,'./app/styles/app.scss')
     },
     extensions:[' ', '.js', '.jsx', '.css', '.scss']

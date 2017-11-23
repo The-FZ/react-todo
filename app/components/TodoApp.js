@@ -2,7 +2,7 @@ var React = require('react');
 
 var Main=(props)=>{
   return (
-      <h1>Hello in the main component of React </h1>
+      <h1>Hello in the TodoApp component of React hurray !!!</h1>
   );
 };
 

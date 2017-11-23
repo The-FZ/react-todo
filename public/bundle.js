@@ -1462,7 +1462,7 @@ module.exports = "!function(t){function e(n){if(i[n])return i[n].exports;var s=i
 
 var React = __webpack_require__(2);
 var ReactDOM = __webpack_require__(27);
-var Main = __webpack_require__(36);
+var TodoApp = __webpack_require__(36);
 
 //custom scss
 __webpack_require__(37);
@@ -1470,7 +1470,7 @@ __webpack_require__(37);
 __webpack_require__(40);
 $(document).foundation();
 
-ReactDOM.render(React.createElement(Main, null), document.getElementById('app'));
+ReactDOM.render(React.createElement(TodoApp, null), document.getElementById('app'));
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)))
 
 /***/ }),
@@ -18791,7 +18791,7 @@ var Main = function Main(props) {
   return React.createElement(
     'h1',
     null,
-    'Hello React '
+    'Hello in the TodoApp component of React hurray !!!'
   );
 };
 
