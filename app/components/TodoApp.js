@@ -1,9 +1,13 @@
 var React = require('react');
+var createReactClass = require('create-react-class');
 
-var Main=(props)=>{
-  return (
-      <h1>Hello in the TodoApp component of React hurray !!!</h1>
-  );
-};
+var TodoApp = createReactClass({
+  
+  render:function(){
+          return (
+              <h1>Hello in the TodoApp component of React hurray !!!</h1>
+            );
+          }
+});
 
-module.exports = Main;
+module.exports = TodoApp;
