@@ -18823,6 +18823,7 @@ module.exports = camelize;
 var React = __webpack_require__(1);
 var createReactClass = __webpack_require__(7);
 var TodoList = __webpack_require__(39);
+var AddTodo = __webpack_require__(46);
 
 var TodoApp = createReactClass({
   displayName: 'TodoApp',
@@ -18844,11 +18845,19 @@ var TodoApp = createReactClass({
       }]
     };
   },
+  handleAddTodo: function handleAddTodo(text) {
+    alert(text);
+  },
 
   render: function render() {
     var todos = this.state.todos;
 
-    return React.createElement(TodoList, { todos: todos });
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(TodoList, { todos: todos }),
+      React.createElement(AddTodo, { onAddTodo: this.handleAddTodo })
+    );
   }
 });
 
@@ -19981,6 +19990,51 @@ exports.push([module.i, "@charset \"UTF-8\";@media print,screen and (min-width:4
 
 // exports
 
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var React = __webpack_require__(1);
+var createReactClass = __webpack_require__(7);
+
+var AddTodo = createReactClass({
+  displayName: 'AddTodo',
+
+
+  handleSubmit: function handleSubmit(event) {
+    event.preventDefault();
+    var todoText = this.refs.todo.value;
+    if (todoText.length > 0) {
+      this.refs.todo.value = '';
+      this.props.onAddTodo(todoText);
+    } else {
+      this.refs.todoText.focus();
+    }
+  },
+
+  render: function render() {
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(
+        'form',
+        { onSubmit: this.handleSubmit },
+        React.createElement('input', { type: 'text', placeholder: 'What do you want to do ?', ref: 'todo' }),
+        React.createElement(
+          'button',
+          { className: 'button expanded' },
+          'Add Todo'
+        )
+      )
+    );
+  }
+});
+
+module.exports = AddTodo;
 
 /***/ })
 /******/ ]);
