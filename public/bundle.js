@@ -31522,7 +31522,7 @@ var uuid = __webpack_require__(107);
 var TodoList = __webpack_require__(200);
 var AddTodo = __webpack_require__(202);
 var TodoSearch = __webpack_require__(203);
-var TodoAPI = __webpack_require__(210);
+var TodoAPI = __webpack_require__(204);
 
 var TodoApp = createReactClass({
   displayName: 'TodoApp',
@@ -31568,13 +31568,17 @@ var TodoApp = createReactClass({
   },
 
   render: function render() {
-    var todos = this.state.todos;
+    var _state = this.state,
+        todos = _state.todos,
+        showCompleted = _state.showCompleted,
+        searchText = _state.searchText;
 
+    var filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
     return React.createElement(
       'div',
       null,
       React.createElement(TodoSearch, { onSearch: this.handleSearch }),
-      React.createElement(TodoList, { todos: todos, onToggle: this.handleToggle }),
+      React.createElement(TodoList, { todos: filteredTodos, onToggle: this.handleToggle }),
       React.createElement(AddTodo, { onAddTodo: this.handleAddTodo })
     );
   }
@@ -42874,7 +42878,61 @@ var TodoSearch = createReactClass({
 module.exports = TodoSearch;
 
 /***/ }),
-/* 204 */,
+/* 204 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var $ = __webpack_require__(45);
+
+module.exports = {
+  setTodos: function setTodos(todos) {
+    if ($.isArray(todos)) {
+      localStorage.setItem('todos', JSON.stringify(todos));
+      return todos;
+    }
+  },
+  getTodos: function getTodos() {
+    var stringTodos = localStorage.getItem('todos');
+    var todos = [];
+
+    try {
+      todos = JSON.parse(stringTodos);
+    } catch (e) {}
+
+    return $.isArray(todos) ? todos : [];
+  },
+  filterTodos: function filterTodos(todos, showCompleted, searchText) {
+    var filteredTodos = todos;
+    //filter by showCompleted
+    filteredTodos = filteredTodos.filter(function (todo) {
+      return !todo.completed || showCompleted;
+    });
+
+    //filter by searchText
+    filteredTodos = filteredTodos.filter(function (todo) {
+      var text = todo.text.toLowerCase();
+
+      return searchText.length === 0 || text.indexOf(searchText) > -1;
+    });
+
+    //sort todos with non completed first
+    filteredTodos = filteredTodos.sort(function (first, second) {
+      if (first.completed && second.completed) {
+        return -1;
+      } else if (first.completed && !second.completed) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+
+    return filteredTodos;
+  }
+};
+
+/***/ }),
 /* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43058,34 +43116,6 @@ exports.push([module.i, "@charset \"UTF-8\";@media print,screen and (min-width:4
 
 // exports
 
-
-/***/ }),
-/* 210 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var $ = __webpack_require__(45);
-
-module.exports = {
-  setTodos: function setTodos(todos) {
-    if ($.isArray(todos)) {
-      localStorage.setItem('todos', JSON.stringify(todos));
-      return todos;
-    }
-  },
-  getTodos: function getTodos() {
-    var stringTodos = localStorage.getItem('todos');
-    var todos = [];
-
-    try {
-      todos = JSON.parse(stringTodos);
-    } catch (e) {}
-
-    return $.isArray(todos) ? todos : [];
-  }
-};
 
 /***/ })
 /******/ ]);

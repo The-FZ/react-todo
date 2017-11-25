@@ -18,5 +18,34 @@ module.exports = {
     }
 
     return $.isArray(todos) ? todos : [];
+  },
+  filterTodos:function(todos,showCompleted, searchText){
+    var filteredTodos = todos;
+    //filter by showCompleted
+    filteredTodos = filteredTodos.filter((todo)=>{
+        return !todo.completed || showCompleted;
+    });
+
+    //filter by searchText
+    filteredTodos = filteredTodos.filter((todo)=>{
+        var text = todo.text.toLowerCase();
+
+        return searchText.length === 0 || text.indexOf(searchText) > -1;
+    });
+
+    //sort todos with non completed first
+    filteredTodos = filteredTodos.sort((first,second)=>{
+      if(first.completed && second.completed){
+        return -1;
+      }
+      else if(first.completed && !second.completed){
+        return 1;
+      }
+      else{
+        return 0;
+      }
+    });
+
+    return filteredTodos;
   }
 };
