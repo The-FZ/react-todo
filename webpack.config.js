@@ -20,7 +20,7 @@ module.exports = {
     filename:'./public/bundle.js'
   },
   resolve:{
-    modules:['node_modules','./app/components'],
+    modules:['node_modules','./app/components', './app/api'],
     alias:{
       applicationStyles:path.resolve(__dirname,'./app/styles/app.scss')
     },
