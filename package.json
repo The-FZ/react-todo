@@ -24,7 +24,6 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.7",
-    "expect": "^21.2.1",
     "foundation-sites": "^6.4.4-rc1",
     "jquery": "^3.2.1",
     "moment": "^2.19.2",
